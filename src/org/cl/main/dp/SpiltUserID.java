@@ -19,9 +19,9 @@ public class SpiltUserID {
 	 * @param args
 	 * @throws IOException 
 	 */
-	static String dir = "ExpandID1_usersy\\";
+	static String dir = "ExpandID0_sy\\";
 	static String id_source = "ExpandID1_usersy";
-	static int groups = 10;//将id_source分为groups份
+	static int groups = 5;//将id_source分为groups份
 	static int max = 100000;
 	public static void main(String args[]) throws IOException{
 		SaveInfo.mkdir(dir);

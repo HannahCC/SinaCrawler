@@ -15,8 +15,8 @@ public class IdFilter {
 	public static void main(String[] args) throws IOException, InterruptedException
 	{
 		RWUid y_ids = GetInfo.getUID("ExpandID1.txt");
-		idFilterFol(y_ids,1);
-		SaveInfo.saveSet("ExpandID1_folsy.txt", y_ids.ids, false);
+		idFilterUserInfo(y_ids,1);
+		SaveInfo.saveSet("ExpandID1_usersy.txt", y_ids.ids, false);
 	}
 	private static void idFilterUserInfo(RWUid y_ids,int deep) throws IOException{
 		GetInfo.idfilter_userId(y_ids,"//Config//UserNotExist.txt");

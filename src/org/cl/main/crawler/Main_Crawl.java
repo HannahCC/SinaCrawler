@@ -1,6 +1,7 @@
 package org.cl.main.crawler;
 
 import java.io.IOException;
+import java.util.Random;
 
 import org.cl.configuration.Config;
 import org.cl.function.Func_GetFolId;
@@ -23,17 +24,16 @@ public class Main_Crawl{
 	public static void main(String[] args) throws IOException, InterruptedException
 	{
 
-		int deep = Integer.parseInt(args[0]);
+		/*int deep = Integer.parseInt(args[0]);
 		int type = Integer.parseInt(args[1]);
 		String Root_Path = args[2];
-		String ID_Path = args[3];
+		String ID_Path = args[3];*/
 
+		int deep = 1;
+		int type = 1;
+		String Root_Path = "D:\\Project_DataMinning\\Data\\Sina_res\\Sina_NLPIRandTHUext1000_Mute_GenderPre\\";//"D:\\Project_DataMinning\\Data\\Sina_res\\Sina_GenderPre\\";//Sina_SexPre\\";//
+		String ID_Path = "ExpandID1_usersy1.txt";//"32w_user_id_all.txt";//
 
-		/*int deep = 1;
-		int type = 22;
-		String Root_Path = "C:\\Users\\Hannah\\Desktop\\sina_fol3\\";//"D:\\Project_DataMinning\\Data\\Sina_res\\Sina_GenderPre\\";//Sina_SexPre\\";//
-		String ID_Path = "ExpandID1_mute_fake_frisy3.txt";//"32w_user_id_all.txt";//
-*/
 
 		/*int deep = 0;
 		int type = 22;

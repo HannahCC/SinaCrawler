@@ -25,11 +25,11 @@ public class MergeData {
 	 * @throws IOException 
 	 */
 	public static void main(String args[]) throws IOException{
-//		MergeJSON("UserInfo1.txt","user1\\UserInfo1.txt","user2\\UserInfo1.txt","user3\\UserInfo1.txt","user4\\UserInfo1.txt","user5\\UserInfo1.txt","user6\\UserInfo1.txt","user7\\UserInfo1.txt","user8\\UserInfo1.txt","user9\\UserInfo1.txt","user10\\UserInfo1.txt");
-//		MergeJSON("UserInfoOfEnterprise1.txt","user1\\UserInfoOfEnterprise1.txt","user2\\UserInfoOfEnterprise1.txt","user3\\UserInfoOfEnterprise1.txt","user4\\UserInfoOfEnterprise1.txt","user5\\UserInfoOfEnterprise1.txt","user6\\UserInfoOfEnterprise1.txt","user7\\UserInfoOfEnterprise1.txt","user8\\UserInfoOfEnterprise1.txt","user9\\UserInfoOfEnterprise1.txt","user10\\UserInfoOfEnterprise1.txt");
-//		MergeText("Config\\UserNotExist.txt","user\\Config\\UserNotExist.txt");
-		MergeJSON("UidInfo_follows1.txt","fol6\\UidInfo_follows1.txt","fol7\\UidInfo_follows1.txt","fol8\\UidInfo_follows1.txt","fol9\\UidInfo_follows1.txt");
-		MergeJSON("UidInfo_friends1.txt","fri6\\UidInfo_friends1.txt");
+		MergeJSON("UserInfo1.txt","learn\\UserInfo1.txt");
+		MergeJSON("UserInfoOfEnterprise1.txt","learn\\UserInfoOfEnterprise1.txt");
+		MergeText("Config\\UserNotExist.txt","learn\\UserNotExist.txt");
+		MergeJSON("UidInfo_follows1.txt","learn\\UidInfo_follows1.txt");
+		MergeJSON("UidInfo_friends1.txt","learn\\UidInfo_friends1.txt");
 	}
 
 	private static void MergeText(String srcfile, String  ... newfiles) throws IOException {
