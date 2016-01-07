@@ -20,6 +20,11 @@ public class GetLoginUser
 	private static List<String> PASSWORD;
 	private static int COUNT=0;
 
+	static class test{
+		public static void main(String args[]) {
+			getLoginUser();
+		}
+	}
 	static
 	{
 		File f=new File(Config.SAVE_PATH+"Config/SinaAccount.txt");

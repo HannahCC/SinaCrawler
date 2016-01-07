@@ -76,15 +76,15 @@ public class GetUserInfo implements Runnable
 		String screen_name = user.getScreenName();
 		String description = user.getDescription();
 		String verifyreason = user.getVerifiedReason();
-		if(screen_name!=null&&contains(keyword,screen_name)){return true;}
-		else if(description!=null&&contains(keyword,description)){return true;}
-		else if(verifyreason!=null&&contains(keyword,verifyreason)){return true;}//此前没有使用这个字段筛选
+		if(screen_name!=null&&endsWith(keyword,screen_name)){return true;}
+		else if(description!=null&&endsWith(keyword,description)){return true;}
+		else if(verifyreason!=null&&endsWith(keyword,verifyreason)){return true;}//此前没有使用这个字段筛选
 		return false;
 	}
 
-	private boolean contains(Set<String> keyword, String str) {
+	private boolean endsWith(Set<String> keyword, String str) {
 		for(String key : keyword){
-			if(str.contains(key))return true;
+			if(str.endsWith(key))return true;
 		}
 		return false;
 	}

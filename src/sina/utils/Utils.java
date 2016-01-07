@@ -15,6 +15,7 @@ import java.util.Set;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import org.cl.configuration.RegexString;
 //I/O操作类
 public class Utils {
@@ -167,5 +168,25 @@ public class Utils {
 		}
 		System.out.println(Thread.currentThread().getName()+"Succeed to sleep!!!NowTime:"+df.format(new Date()));
 	}
-
+	/**
+	 * 清除原始微博来源中的杂乱信息
+	 * @param weibo_item
+	 * @return
+	 */
+	public static String clearSource(String src) {
+		if(src.equals("null")){return null;}
+		if(src.equals("")){return src;}
+		return src.substring(src.indexOf(">")+1,src.lastIndexOf("<"));
+	}
+	/**
+	 * 获取原始微博来源中来源的url
+	 * @param src
+	 * @return
+	 */
+	public static String getSource(String src) {
+		if(src.equals("null")){return null;}
+		if(src.equals("")){return src;}
+		String[] items = src.split("\\\"");
+		return items[1];
+	}
 }

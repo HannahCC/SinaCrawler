@@ -25,11 +25,11 @@ public class MergeData {
 	 * @throws IOException 
 	 */
 	public static void main(String args[]) throws IOException{
-		MergeJSON("UserInfo1.txt","learn\\UserInfo1.txt");
-		MergeJSON("UserInfoOfEnterprise1.txt","learn\\UserInfoOfEnterprise1.txt");
-		MergeText("Config\\UserNotExist.txt","learn\\UserNotExist.txt");
-		MergeJSON("UidInfo_follows1.txt","learn\\UidInfo_follows1.txt");
-		MergeJSON("UidInfo_friends1.txt","learn\\UidInfo_friends1.txt");
+		MergeJSON("UserInfo1.txt","ExpandID0_sy\\UserInfo1.txt");
+		MergeJSON("UserInfoOfEnterprise1.txt","ExpandID0_sy\\UserInfoOfEnterprise1.txt");
+		MergeText("Config\\UserNotExist.txt","ExpandID0_sy\\UserNotExist.txt");
+		MergeJSON("UidInfo_follows1.txt","ExpandID0_sy\\UidInfo_follows1.txt","ExpandID0_sy\\UidInfo_follows1 (2).txt");
+		MergeJSON("UidInfo_friends1.txt","ExpandID0_sy\\UidInfo_friends1.txt","ExpandID0_sy\\UidInfo_friends1 (2).txt");
 	}
 
 	private static void MergeText(String srcfile, String  ... newfiles) throws IOException {

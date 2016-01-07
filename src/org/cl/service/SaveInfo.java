@@ -332,15 +332,15 @@ public class SaveInfo
 		w.flush();
 		w.close();
 	}
-	public static synchronized void saveMap(String filename, String uid, Map<Integer,Integer> map,boolean isAppend) {
+	public static synchronized void saveMap(String filename, String uid, Map<?,?> map,boolean isAppend) {
 		try {
 			if(map==null||map.size()==0)return;
 			File f = new File(Config.SAVE_PATH+filename);
 			BufferedWriter w = new BufferedWriter(new FileWriter(f,isAppend));
-			Iterator<Entry<Integer,Integer>> it = map.entrySet().iterator();
+			Iterator<?> it = map.entrySet().iterator();
 			w.write(uid+"\t");
 			while(it.hasNext()){
-				Entry<Integer,Integer> entry = it.next();
+				Entry entry = (Entry) it.next();
 				w.write(entry.getKey()+":"+entry.getValue()+"\t");
 			}
 			w.write("\r\n");

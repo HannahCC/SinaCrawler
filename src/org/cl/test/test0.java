@@ -1,26 +1,10 @@
 package org.cl.test;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 import org.cl.configuration.Config;
 import org.cl.http.SpiderSina;
-import org.cl.run.GetAtRec;
-import org.cl.run.GetFolId;
-import org.cl.run.GetFriId;
-import org.cl.run.GetUserInfo;
-import org.cl.run.GetWeiBo;
-import org.cl.service.GetInfo;
-import org.cl.service.GetLoginUser;
 import org.cl.service.Login;
-import org.cl.service.SaveInfo;
-
-import com.gargoylesoftware.htmlunit.WebClient;
 /**
  * 测试各个功能
  * @author Administrator

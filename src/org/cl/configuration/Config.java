@@ -18,7 +18,7 @@ public class Config
 
 	
 	/** 所有信息保存地址*/
-	public static String SAVE_PATH="D:\\Project_DataMinning\\Data\\Sina_res\\Sina_NLPIR\\";//ext1000_Mute_GenderPre//"D:\\Project_DataMinning\\Data\\Sina_res\\Sina_AgePre_JSON_1000\\";// 
+	public static String SAVE_PATH="D:\\Project_DataMinning\\Data\\Sina_res\\Sina_NLPIR400_Good\\";//ext1000_Mute_GenderPre//"D:\\Project_DataMinning\\Data\\Sina_res\\Sina_AgePre_JSON_1000\\";// 
 	//public static String SAVE_PATH="D:\\Project_DataMinning\\Data\\Sina_res\\Sina_GenderPre\\"; 
 	
 	/** 程序最大连续请求次数（建议10000-20000）*/

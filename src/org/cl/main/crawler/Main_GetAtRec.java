@@ -8,7 +8,7 @@ import org.cl.configuration.Config;
 import org.cl.http.SpiderSina;
 import org.cl.run.GetAtRec;
 import org.cl.service.GetInfo;
-import org.cl.service.GetLoginUser;
+import org.cl.service.Login;
 import org.cl.service.MyRejectHandler;
 import org.cl.service.RWUid;
 import org.cl.service.SaveInfo;
@@ -19,17 +19,15 @@ public class Main_GetAtRec {
 	private static ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(Config.corePoolSize,Config.maximumPoolSize,Config.keepAliveTime,
 			Config.unit,new LinkedBlockingQueue<Runnable>(),new MyRejectHandler());
 	
-	private static void init() {
-		Config.initial("D:\\Project_DataMinning\\Data\\Sina_res\\Sina_AgePre\\");
-		SaveInfo.mkdir("Weibos_At");
-	}
 	private static void idFilter(RWUid y_ids){
 		GetInfo.idfilter_dirId(y_ids, "Weibos_At");
 	}
 	public static void main(String args[]) throws IOException, InterruptedException
 	{	
-		init();
-		GetLoginUser.setLOGIN_USER(GetLoginUser.getLoginUser());
+		Config.initial("D:\\Project_DataMinning\\Data\\Sina_res\\Sina_AgePre\\");
+		//登录
+		Login.login();
+		SaveInfo.mkdir("Weibos_At");
 		RWUid y_ids = GetInfo.getUIDinDir("Weibos");//读取用户ID放入ids[hashSet]
 		idFilter(y_ids);
 		//抓取

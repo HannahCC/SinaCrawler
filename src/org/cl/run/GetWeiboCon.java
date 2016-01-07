@@ -20,8 +20,8 @@ public class GetWeiboCon implements Runnable{
 	public void run()
 	{
 		System.out.println("Getting weiboCon of "+uid);
-		List<String> weibo_list = new ArrayList<String>();
 		try {
+			List<String> weibo_list = new ArrayList<String>();
 			GetInfo.getList("/Weibos/"+uid+".txt",weibo_list,false,"weibo","text");
 			List<String> cleared_weibo_list = new ArrayList<String>();
 			for(String weibo : weibo_list){
