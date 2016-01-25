@@ -31,39 +31,41 @@ public class GetWeiBo implements Runnable
 		SpiderSina spider=new SpiderSina();
 		ArrayList<StatusAndComment> status_and_comments=new ArrayList<StatusAndComment>();
 		Status wb=null;
-		for(int i=1;i<=20;i++)
+		for(int i=1;i<=5;i++)
 		{
-			String json=spider.getWeiBo(uid,i,50);
+			String json=spider.getWeiBo(uid,i,100);
 			WeiBoInfo wbinfo=StatusParser.getWeiBoInfo(json);
 			if(wbinfo==null){continue;}//crawler fail
 			if(wbinfo.getTotal_number()==-1){break;}//user not exist.
-			for(String wbJson : wbinfo.getJsons())//50条微博
+			for(String wbJson : wbinfo.getJsons())//100条微博
 			{
 				wb=StatusParser.getStatus(wbJson);
 				List<Comment> comments=new ArrayList<Comment>();
 				if(wb.getCommentsCount()>0)
 				{
 					//获取前100条评论
+					System.out.println("Getting weibo comment of "+wb.getId());
 					json = spider.getComment(wb.getId());
 					CommentInfo comm=CommentParser.getCommentInfo(json);
-					if(comm!=null){//没爬到评论，则认为评论为0
+					if(comm!=null){//没爬到评论//，则认为评论为0
 						for(String info : comm.getJsons()){	
 							comments.add(CommentParser.getComment(info));
 						}
-					}else{wb.setCommentsCount(0);}
+					}//else{wb.setCommentsCount(0);}
+					long time = Config.getUnitSleepTime();	
+					if((time & 2) > 0){ //随机休眠时间能够整除2则休眠，即50%的可能休眠。替代原来的//每爬一条微博的评论休眠一次   太慢了！！！
+						try {
+							Thread.sleep(time);
+						} catch (InterruptedException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
 				}
 				StatusAndComment temp=new StatusAndComment();
 				temp.setWeibo(wb);
 				temp.setComment(comments);
 				status_and_comments.add(temp);
-
-				//每爬一轮评论休眠5s
-				try {
-					Thread.sleep(Config.getUnitSleepTime());
-				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
 			}
 			if((i*50)>wbinfo.getTotal_number())//如果已经获取所有评论，则结束爬取
 			{

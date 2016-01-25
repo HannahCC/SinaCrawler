@@ -12,7 +12,7 @@ import org.cl.service.SaveInfo;
 
 public class Func_GetWeibo
 {
-	private ThreadPoolExecutor threadPool = new ThreadPoolExecutor(Config.corePoolSize,Config.maximumPoolSize,Config.keepAliveTime,
+	private ThreadPoolExecutor threadPool = new ThreadPoolExecutor(1,1,Config.keepAliveTime,
 			Config.unit,new LinkedBlockingQueue<Runnable>(),new MyRejectHandler());
 	/**
 	 * 根据用户ID获取用户的微博
@@ -53,8 +53,8 @@ public class Func_GetWeibo
 		//UserInfo.txt
 		GetInfo.idfilter_userId(y_ids,"//Config//UserNotExist.txt");
 		GetInfo.idfilter_dirId(y_ids, "//Weibos");
-		for(int i=0;i<=deep;i++){
+		/*for(int i=0;i<=deep;i++){
 			GetInfo.idfilter_userJson(y_ids,"//UserInfoOfEnterprise"+deep+".txt");
-		}
+		}*/
 	}
 }

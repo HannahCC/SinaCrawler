@@ -93,7 +93,7 @@ public class HttpUtils
 		if(Resources.getREQUEST_NUM()>=Config.REQUEST_MAX)
 		{
 			System.out.println("REQUEST_NUM is getting MAX!Relogin!");
-			Login.login();
+			Login.login(false);
 			Resources.setREQUEST_NUM(0);	//请求数归零
 			return null;
 		}
@@ -114,7 +114,7 @@ public class HttpUtils
 			response = client.execute(getMethod);
 			int status = response.getStatusLine().getStatusCode();
 			if(status>400&&status<500){
-				Login.login();
+				Login.login(false);
 			}
 			return response;
 		}catch (Exception e){
@@ -124,11 +124,56 @@ public class HttpUtils
 			}else{
 				System.out.println(e.getMessage() + ".The connecttion is refused!");
 			}
-			Login.login();
+			Login.login(false);
 			return null;
 		}
 	}
-
+	/*
+	 * params : url: 地址 headers：请求头部信息 return : httpresponse响应
+	 */
+	public static HttpResponse doGet2(String url, Map<String, String> headers)
+	{
+		//请求数增加
+		Resources.addREQUEST();
+		//请求数已达到最大值
+		if(Resources.getREQUEST_NUM()>=Config.REQUEST_MAX)
+		{
+			System.out.println("REQUEST_NUM is getting MAX!Relogin!");
+			Login.login(true);
+			Resources.setREQUEST_NUM(0);	//请求数归零
+			return null;
+		}
+		
+		
+		HttpClient client = createHttpClient();
+		HttpGet getMethod = new HttpGet(url);
+		HttpResponse response = null;
+		try
+		{
+			if (headers != null && headers.keySet().size() > 0)
+			{
+				for (String key : headers.keySet())
+				{
+					getMethod.addHeader(key, headers.get(key));
+				}
+			}
+			response = client.execute(getMethod);
+			int status = response.getStatusLine().getStatusCode();
+			if(status>400&&status<500){
+				Login.login(true);
+			}
+			return response;
+		}catch (Exception e){
+			String msg = e.getMessage();
+			if (msg.contains("Truncated chunk")){
+				System.out.println(e.getMessage() + "Data is not completed.it needs to get again!");
+			}else{
+				System.out.println(e.getMessage() + ".The connecttion is refused!");
+			}
+			Login.login(true);
+			return null;
+		}
+	}
 	/*
 	 * params : url: 地址 headers：请求头部信息 params：post的请求数据 return : httpresponse响应
 	 */

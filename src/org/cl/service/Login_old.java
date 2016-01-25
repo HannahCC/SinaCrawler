@@ -13,7 +13,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPasswordInput;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 
-public class Login {
+public class Login_old {
 	private static WebClient LOGIN_WC = null;
 	private static Date lastTime = null;
 	public synchronized static WebClient getLOGIN_LOGIN_WC() {
@@ -66,7 +66,7 @@ public class Login {
 		LOGIN_WC.getOptions().setActiveXNative(false);
 		LOGIN_WC.getOptions().setJavaScriptEnabled(false);
 
-		HtmlPage page = HttpUtils.getPage(LOGIN_WC, "https://passport.weibo.cn/signin/login");//"http://login.weibo.cn/login/");
+		HtmlPage page = HttpUtils.getPage(LOGIN_WC, "http://login.weibo.cn/login/");
 		//如果得到的页面标题不对，则登录失败，否则执行提交登录请求
 		/*if(!"Welcome to Facebook - Log In, Sign Up or Learn More".endsWith(page.getTitleText())){
 		System.out.println("get the wrong page:"+page.getTitleText());return null;

@@ -29,12 +29,13 @@ public class Main_GetWeiboSrc {
 		//读取用户ID放入ids[hashSet]
 		RWUid y_ids=GetInfo.getUIDinDir("Weibos");
 		String result_filename = "WeibosSrc\\Src_map.txt";
+		String result_filename2 = "Feature_UserInfo\\UserIdSrc.txt";
 		idFilter(y_ids);
 		
 
 		String uid = null;
 		while (null!=(uid = y_ids.getUid())) {
-			GetWeiboSrc getWeiboSrc = new GetWeiboSrc(uid,result_filename);
+			GetWeiboSrc getWeiboSrc = new GetWeiboSrc(uid,result_filename,result_filename2);
 			threadPool.execute(getWeiboSrc);
 		}
 		

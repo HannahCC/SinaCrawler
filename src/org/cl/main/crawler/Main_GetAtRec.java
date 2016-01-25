@@ -26,7 +26,7 @@ public class Main_GetAtRec {
 	{	
 		Config.initial("D:\\Project_DataMinning\\Data\\Sina_res\\Sina_AgePre\\");
 		//登录
-		Login.login();
+		Login.login(false);
 		SaveInfo.mkdir("Weibos_At");
 		RWUid y_ids = GetInfo.getUIDinDir("Weibos");//读取用户ID放入ids[hashSet]
 		idFilter(y_ids);

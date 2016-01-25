@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.cl.configuration.Config;
 import org.cl.http.SpiderSina;
+import org.cl.run.GetWeiBo;
 import org.cl.service.Login;
 /**
  * 测试各个功能
@@ -14,12 +15,10 @@ public class test0
 {
 	public static void main(String[] args) throws IOException
 	{
-		Config.initial("D:\\Project_DataMinning\\Data\\Sina_res\\Sina_AgePre_JSON\\");
 		//登录
-		Login.login();
-		SpiderSina spider=new SpiderSina();
-		String uid = "1321621261";
-		spider.tempGet();
+		Config.initial("D:\\Project_DataMinning\\Data\\Sina_res\\Sina_NLPIR23335_AgeEduJob\\");
+		Login.login(false);
+		String uid = "9775521";
 		/*GetUserInfo user_info=new GetUserInfo(uid, spider);
 		user_info.run();*/
 
@@ -30,9 +29,9 @@ public class test0
 		
 		/*GetFolId fol_info = new GetFolId(uid, spider);
 		fol_info.run();*/
-		/*GetWeiBo wb=new GetWeiBo(uid, spider);
+		GetWeiBo wb=new GetWeiBo(uid);
 		wb.run();
-		GetAtRec at = new GetAtRec(uid,spider);
+		/*GetAtRec at = new GetAtRec(uid,spider);
 		at.run();*/
 		
 	}

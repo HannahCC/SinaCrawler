@@ -16,32 +16,40 @@ import sina.utils.Utils;
 public class Config
 {
 
-	
+
 	/** 所有信息保存地址*/
-	public static String SAVE_PATH="D:\\Project_DataMinning\\Data\\Sina_res\\Sina_NLPIR400_Good\\";//ext1000_Mute_GenderPre//"D:\\Project_DataMinning\\Data\\Sina_res\\Sina_AgePre_JSON_1000\\";// 
+	public static String SAVE_PATH="D:\\Project_DataMinning\\Data\\Sina_res\\Sina_NLPIR2223_GenderPre\\";//ext1000_Mute_GenderPre//"D:\\Project_DataMinning\\Data\\Sina_res\\Sina_AgePre_JSON_1000\\";// 
 	//public static String SAVE_PATH="D:\\Project_DataMinning\\Data\\Sina_res\\Sina_GenderPre\\"; 
-	
+
 	/** 程序最大连续请求次数（建议10000-20000）*/
 	public static int REQUEST_MAX=20000;
-	
+
 	/** 账号全部使用过后休眠一段时间 **/
-	public static int SLEEP_TIME=36000000;
+	public static int SLEEP_UNIT_TIME=5000;
+	public static int SLEEP_TIME=3600000; //1小时
 
 	/** 请求重试次数*/
 	public static int RETRY = 3;
-	
+
 	/** 多线程设置 */
 	public static int corePoolSize = 4;
 	public static int maximumPoolSize = 4;
 	public static int keepAliveTime = 10;
 	public static TimeUnit unit = TimeUnit.MINUTES;
-	
+
 	/** 账号设置 **/
 	public static List<String> USERNAME;
 	public static List<String> PASSWORD;
 	public static int COUNT = -1;
 	public static int COUNT_MAX = 0;
-	
+
+	/** IP设置 **/
+	public static List<String> PROXY = new ArrayList<String>();
+	public static List<Integer> PROT = new ArrayList<Integer>();
+	public static int PROXY_COUNT = 0;
+	public static int PROXY_COUNT_MAX = 0;
+
+
 	/** 每次登陆获取一个账号，所有账号使用一轮后休眠一次 **/
 	public synchronized static void changeCount() {
 		if(COUNT<COUNT_MAX-1){
@@ -53,18 +61,18 @@ public class Config
 			Resources.setREQUEST_NUM(0);	//请求数归零
 		}
 	}
-	
+
 	/** 每爬取一个ID的信息后，线程休眠随机时间，以此降低爬取速度*/
 	public static long getUnitSleepTime(){
 		Random r = new Random();
-		int sleep_time = r.nextInt(10000);
+		int sleep_time = r.nextInt(SLEEP_UNIT_TIME);
 		return sleep_time;
 	}
-	
+
 	/** 达到最大的请求次数或请求被拒绝时程序的休眠时间,单位为毫秒（建议3600000-7200000）*/
 	public static long getSleepTime(){
 		Random r = new Random();
-		int sleep_time = r.nextInt(3600000);
+		int sleep_time = r.nextInt(SLEEP_TIME);
 		return sleep_time;
 	}
 
@@ -85,6 +93,7 @@ public class Config
 			}
 			if(confmap.containsKey("REQUEST_MAX")){REQUEST_MAX = Integer.parseInt(confmap.get("REQUEST_MAX"));}
 			if(confmap.containsKey("SLEEP_TIME")){SLEEP_TIME = Integer.parseInt(confmap.get("SLEEP_TIME"));}
+			if(confmap.containsKey("SLEEP_UNIT_TIME")){SLEEP_UNIT_TIME = Integer.parseInt(confmap.get("SLEEP_UNIT_TIME"));}
 			if(confmap.containsKey("RETRY")){RETRY = Integer.parseInt(confmap.get("RETRY"));}
 			if(confmap.containsKey("corePoolSize")){corePoolSize = Integer.parseInt(confmap.get("corePoolSize"));}
 			if(confmap.containsKey("maximumPoolSize")){maximumPoolSize = Integer.parseInt(confmap.get("maximumPoolSize"));}
@@ -97,8 +106,8 @@ public class Config
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		f=new File(Config.SAVE_PATH+"Config\\SinaAccount.txt");
+
+		f=new File(Config.SAVE_PATH+"Config//SinaAccount.txt");
 		try {
 			BufferedReader r = new BufferedReader(new FileReader(f));
 			String usr = "";
@@ -120,6 +129,27 @@ public class Config
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
+		//获取IP地址
+		PROXY.add("");//即使用本机Ip
+		PROT.add(0);
+		PROXY_COUNT_MAX++;
+		File f2 = new File(Config.SAVE_PATH+"Config//IP.txt");
+		try {	
+			if(f2.exists()){
+				BufferedReader r = new BufferedReader(new FileReader(f2));
+				String usr = "";
+				while((usr = r.readLine())!= null){
+					PROXY.add(usr.split("\t")[0]);
+					PROT.add(Integer.parseInt(usr.split("\t")[1]));
+					PROXY_COUNT_MAX++;
+				}
+				r.close();
+			} 
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
+
 }

@@ -123,6 +123,7 @@ trim_user	false	int		返回值中user字段开关，0：返回完整user字段�
 				"&page="+page+
 				"&count="+count+
 				"&trim_user=1"+
+				"&feature=1"+
 				"&source="+SOURCE;
 		HttpResponse response = HttpUtils.doGet(url, headers);
 		String responseText = HttpUtils.getStringFromResponse(response);

@@ -47,7 +47,7 @@ public class Func_GetFriId{
 	private static void idFilter(RWUid y_ids,int deep) throws IOException{
 		GetInfo.idfilter_userId(y_ids,"//Config//UserNotExist.txt");
 		for(int i=0;i<=deep;i++){
-			GetInfo.idfilter_userJson(y_ids,"//UidInfo_friends"+i+".txt","//UserInfoOfEnterprise"+i+".txt");
+			GetInfo.idfilter_userJson(y_ids,"//UidInfo_friends"+i+".txt"/*,"//UserInfoOfEnterprise"+i+".txt"*/);
 		}
 	}
 }
