@@ -15,7 +15,6 @@ import java.util.regex.Pattern;
 
 import net.sf.json.JSONObject;
 
-import org.cl.configuration.Config;
 import org.cl.configuration.RegexString;
 
 public class CommonTest {

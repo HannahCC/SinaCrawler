@@ -16,15 +16,16 @@ public class GetUserInfo implements Runnable
 {
 	/**用户ID*/
 	private String uid=null;
+	private SpiderSina spider=null;
 
-	public GetUserInfo(String uid)
+	public GetUserInfo(String uid,SpiderSina spider)
 	{
 		this.uid=uid;
+		this.spider = spider;
 	}
 
 	public void run()
 	{
-		SpiderSina spider=new SpiderSina();
 		System.out.println("Getting userInfo of "+uid);
 		User user = null;
 		String json=spider.getUserInfo(uid);

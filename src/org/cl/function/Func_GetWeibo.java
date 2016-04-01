@@ -4,6 +4,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 
 import org.cl.configuration.Config;
+import org.cl.http.SpiderSina;
 import org.cl.run.GetWeiBo;
 import org.cl.service.GetInfo;
 import org.cl.service.MyRejectHandler;
@@ -14,6 +15,11 @@ public class Func_GetWeibo
 {
 	private ThreadPoolExecutor threadPool = new ThreadPoolExecutor(1,1,Config.keepAliveTime,
 			Config.unit,new LinkedBlockingQueue<Runnable>(),new MyRejectHandler());
+	private SpiderSina spider;
+
+	public Func_GetWeibo(SpiderSina spider) {
+		spider = this.spider;
+	}
 	/**
 	 * 根据用户ID获取用户的微博
 	 * */
@@ -27,7 +33,7 @@ public class Func_GetWeibo
 
 		String uid = null;
 		while (null!=(uid=y_ids.getUid())) {
-			GetWeiBo getWeiBo = new GetWeiBo(uid);
+			GetWeiBo getWeiBo = new GetWeiBo(uid,spider);
 			threadPool.execute(getWeiBo);
 		}
 		

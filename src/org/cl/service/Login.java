@@ -7,10 +7,9 @@ import org.cl.http.HttpUtils;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPasswordInput;
-import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 
 public class Login {
@@ -64,28 +63,28 @@ public class Login {
 		//WebClient LOGIN_WC = new WebClient(BrowserVersion.CHROME);
 		LOGIN_WC.getOptions().setCssEnabled(false);
 		LOGIN_WC.getOptions().setActiveXNative(false);
-		LOGIN_WC.getOptions().setJavaScriptEnabled(false);
+		//LOGIN_WC.getOptions().setJavaScriptEnabled(false);
 
-		HtmlPage page = HttpUtils.getPage(LOGIN_WC, "https://passport.weibo.cn/signin/login");//"http://login.weibo.cn/login/");
+		HtmlPage page = HttpUtils.getPage(LOGIN_WC, "https://passport.weibo.cn/signin/login");
 		//如果得到的页面标题不对，则登录失败，否则执行提交登录请求
 		/*if(!"Welcome to Facebook - Log In, Sign Up or Learn More".endsWith(page.getTitleText())){
 		System.out.println("get the wrong page:"+page.getTitleText());return null;
 		}*/
 		//获取登录表单，提交登录请求
-		HtmlForm login_form = (HtmlForm) page.getElementsByTagName("form").get(0);
-		HtmlTextInput username = login_form.getInputByName("mobile");
-
+		HtmlTextInput username = (HtmlTextInput) page.getElementById("loginName");
+		HtmlPasswordInput password = (HtmlPasswordInput) page.getElementById("loginPassword");
+		HtmlAnchor login = (HtmlAnchor) page.getElementById("loginAction");
+		
 		if(Config.USERNAME.size()==0||Config.PASSWORD.size()==0){System.out.println("Please write your Account into Account.txt file.");System.exit(-1);}
 		Config.changeCount();
 		username.setValueAttribute(Config.USERNAME.get(Config.COUNT));
-		HtmlPasswordInput password = (HtmlPasswordInput) page.getByXPath("//Input[@type='password']").get(0);
 		password.setValueAttribute(Config.PASSWORD.get(Config.COUNT));
-		HtmlSubmitInput login = login_form.getInputByName("submit");
-		HtmlPage index = HttpUtils.click(login);
-
+		HtmlPage index = HttpUtils.click(login); 
+		index = HttpUtils.getPage(LOGIN_WC, "http://m.weibo.cn/");
+		
 		//判断是否登录成功
-		//System.out.println(index.asText());
-		if(!"我的首页".endsWith(index.getTitleText())){
+		//System.out.println(index.asXml());
+		if(!"微博 - 随时随地发现新鲜事".endsWith(index.getTitleText())){
 			System.out.println(Config.USERNAME.get(Config.COUNT)+":"+Config.PASSWORD.get(Config.COUNT)+"--login fail!:"+index.getTitleText());return;
 		}else{
 			System.out.println(Config.USERNAME.get(Config.COUNT)+":"+Config.PASSWORD.get(Config.COUNT)+"--login successfully!");	

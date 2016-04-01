@@ -12,16 +12,16 @@ public class GetUserType implements Runnable
 {
 	/**用户ID*/
 	private String uid=null;
+	private SpiderSina spider=null;
 
-	public GetUserType(String uid)
+	public GetUserType(String uid,SpiderSina spider)
 	{
 		this.uid=uid;
+		this.spider = spider;
 	}
-
 	public void run()
 	{
 		System.out.println("Getting uidType of "+uid);
-		SpiderSina spider=new SpiderSina();
 		String json=spider.getUserInfo(uid);
 		User user=UserParser.getUser(json);
 		if(user==null){return;}//发生意外，未得到用户信息

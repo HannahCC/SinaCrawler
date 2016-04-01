@@ -41,6 +41,7 @@ import org.cl.service.GetInfo;
 import org.cl.service.Login;
 
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 
@@ -68,6 +69,20 @@ public class HttpUtils
 		return page;
 	}
 
+	public static HtmlPage click(HtmlAnchor anchor){
+		HtmlPage page = null;
+		int retry = 0;
+		while(retry<3){
+			try {
+				page = anchor.click();
+				retry=3;
+			} catch (Exception e) {
+				retry++;
+				System.out.println("click error:");
+			}
+		}
+		return page;
+	}
 	public static HtmlPage click(HtmlSubmitInput button){
 		HtmlPage page = null;
 		int retry = 0;

@@ -19,16 +19,16 @@ public class GetWeiBo implements Runnable
 {
 	/**用户ID*/
 	private String uid=null;
+	private SpiderSina spider=null;
 
-	public GetWeiBo(String uid)
+	public GetWeiBo(String uid,SpiderSina spider)
 	{
 		this.uid=uid;
+		this.spider = spider;
 	}
-
 	public void run()
 	{
 		System.out.println("Getting weibo of "+uid);
-		SpiderSina spider=new SpiderSina();
 		ArrayList<StatusAndComment> status_and_comments=new ArrayList<StatusAndComment>();
 		Status wb=null;
 		for(int i=1;i<=5;i++)
@@ -67,7 +67,7 @@ public class GetWeiBo implements Runnable
 				temp.setComment(comments);
 				status_and_comments.add(temp);
 			}
-			if((i*50)>wbinfo.getTotal_number())//如果已经获取所有评论，则结束爬取
+			if((i*100)>wbinfo.getTotal_number())//如果已经获取所有微博，则结束爬取
 			{
 				break;
 			}

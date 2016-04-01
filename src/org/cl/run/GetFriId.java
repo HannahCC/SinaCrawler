@@ -12,16 +12,17 @@ public class GetFriId implements Runnable
 {
 	/**用户ID*/
 	private String uid=null;
+	private SpiderSina spider=null;
 
-	public GetFriId(String uid)
+	public GetFriId(String uid,SpiderSina spider)
 	{
 		this.uid=uid;
+		this.spider = spider;
 	}
 
 	public void run()
 	{
 		System.out.println("Getting friends ID of "+uid);
-		SpiderSina spider=new SpiderSina();
 		UidInfo ids_friends = null;
 		String json_friends=spider.getFriends(uid, 500, 0);
 		ids_friends=UIDParser.getUID(uid,json_friends);

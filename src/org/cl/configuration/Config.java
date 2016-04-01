@@ -32,9 +32,9 @@ public class Config
 	public static int RETRY = 3;
 
 	/** 多线程设置 */
-	public static int corePoolSize = 4;
-	public static int maximumPoolSize = 4;
-	public static int keepAliveTime = 10;
+	public static int corePoolSize = 8;
+	public static int maximumPoolSize = 8;
+	public static int keepAliveTime = 1;
 	public static TimeUnit unit = TimeUnit.MINUTES;
 
 	/** 账号设置 **/

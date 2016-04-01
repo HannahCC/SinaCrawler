@@ -5,6 +5,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 
 import org.cl.configuration.Config;
+import org.cl.http.SpiderSina;
 import org.cl.run.GetUserType;
 import org.cl.service.GetInfo;
 import org.cl.service.MyRejectHandler;
@@ -16,11 +17,11 @@ public class Func_GetUserType
 
 	private ThreadPoolExecutor threadPool = new ThreadPoolExecutor(Config.corePoolSize,Config.maximumPoolSize,Config.keepAliveTime,
 			Config.unit,new LinkedBlockingQueue<Runnable>(),new MyRejectHandler());
-	/**
-	 * 
-	 * @throws IOException 
-	 * @throws InterruptedException 
-	 * */
+	private SpiderSina spider;
+
+	public Func_GetUserType(SpiderSina spider) {
+		spider = this.spider;
+	}
 	public void getUserType(String path,int deep) throws IOException, InterruptedException
 	{	
 		SaveInfo.initFileEnvironment_GetUserType(deep);
@@ -31,7 +32,7 @@ public class Func_GetUserType
 		
 		String uid = null;
 		while (null!=(uid=y_ids.getUid())) {
-			GetUserType getUserType = new GetUserType(uid);
+			GetUserType getUserType = new GetUserType(uid,spider);
 			threadPool.execute(getUserType);
 		}
 		

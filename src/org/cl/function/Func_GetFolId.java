@@ -5,6 +5,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 
 import org.cl.configuration.Config;
+import org.cl.http.SpiderSina;
 import org.cl.run.GetFolId;
 import org.cl.service.GetInfo;
 import org.cl.service.MyRejectHandler;
@@ -14,7 +15,11 @@ import org.cl.service.SaveInfo;
 public class Func_GetFolId{
 	private ThreadPoolExecutor threadPool = new ThreadPoolExecutor(Config.corePoolSize, Config.maximumPoolSize, Config.keepAliveTime, 
 			Config.unit, new LinkedBlockingQueue<Runnable>(),new MyRejectHandler());
-		
+	private SpiderSina spider;
+
+	public Func_GetFolId(SpiderSina spider) {
+		spider = this.spider;
+	}
 	public void getUidInfo(String path,int deep) throws IOException, InterruptedException
 	{	
 		SaveInfo.initFileEnvironment_GetFolId(deep);
@@ -23,7 +28,7 @@ public class Func_GetFolId{
 		idFilter(y_ids,deep);
         String uid = null;
         while (null!=(uid=y_ids.getUid())) {
-        	GetFolId getUidInfo = new GetFolId(uid);
+        	GetFolId getUidInfo = new GetFolId(uid,spider);
         	threadPool.execute(getUidInfo);
 		}
         

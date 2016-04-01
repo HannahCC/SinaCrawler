@@ -12,15 +12,15 @@ public class GetFolId implements Runnable
 {
 	/**用户ID*/
 	private String uid=null;
+	private SpiderSina spider=null;
 
-	public GetFolId(String uid)
+	public GetFolId(String uid,SpiderSina spider)
 	{
 		this.uid=uid;
+		this.spider = spider;
 	}
-
 	public void run()
 	{
-		SpiderSina spider=new SpiderSina();
 		System.out.println("Getting uidInfo of "+uid);
 		UidInfo ids_follower = null;
 		String json_follower=spider.getFollowers(uid, 500, 0);

@@ -30,7 +30,6 @@ public class Main_GetWeiboCon {
 		RWUid y_ids=GetInfo.getUIDinDir("Weibos");
 		idFilter(y_ids);
 		
-
 		String uid = null;
 		while (null!=(uid = y_ids.getUid())) {
 			GetWeiboCon getWeiboCon = new GetWeiboCon(uid);

@@ -42,7 +42,7 @@ public class GetWeiboSrc implements Runnable{
 					src_map.put(src_clean, src_map.get(src_clean)+1);
 				}else{
 					src_map.put(src_clean, 1);
-					src_str.append(src_clean+"\t");
+					src_str.append(src_clean.replaceAll("\\s+", "")+"\t");
 				}
 				spilted_src_list.add(src_clean+"\t"+src_href);
 			}

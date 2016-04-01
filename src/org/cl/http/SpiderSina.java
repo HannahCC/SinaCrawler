@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.http.HttpResponse;
-import org.cl.service.Login;
 
 import com.gargoylesoftware.htmlunit.util.Cookie;
 
@@ -14,17 +13,13 @@ public class SpiderSina
 {
 	/** 请求授权参数*/
 	private static final String SOURCE="140226478";
-	private Map<String, String> headers;
+	private static final  Map<String, String> headers = new HashMap<String, String>();
 
-	public SpiderSina()
+	public SpiderSina(Set<Cookie> cookie)
 	{
-		Set<Cookie> cookie = Login.getLOGIN_LOGIN_WC().getCookieManager().getCookies();
-		this.headers = new HashMap<String, String>();
 		headers.put("Accept", "text/html, application/xhtml+xml, */*");
 		headers.put("Accept-Language", "zh-cn");
-		headers
-		.put("User-Agent",
-				"Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0; BOIE9;ZHCN");
+		headers.put("User-Agent","Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0; BOIE9;ZHCN");
 		headers.put("Connection", "Keep-Alive");
 		headers.put("Cache-Control", "no-cache");
 		String cookieValue = HttpUtils.setCookieString(cookie);

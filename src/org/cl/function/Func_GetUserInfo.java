@@ -5,6 +5,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 
 import org.cl.configuration.Config;
+import org.cl.http.SpiderSina;
 import org.cl.run.GetUserInfo;
 import org.cl.service.GetInfo;
 import org.cl.service.MyRejectHandler;
@@ -15,7 +16,11 @@ public class Func_GetUserInfo
 {
 	private ThreadPoolExecutor threadPool = new ThreadPoolExecutor(Config.corePoolSize,Config.maximumPoolSize, Config.keepAliveTime, 
 			Config.unit, new LinkedBlockingQueue<Runnable>(), new MyRejectHandler());//限制3个线程，防止服务器性能不够用
+	private SpiderSina spider;
 
+	public Func_GetUserInfo(SpiderSina spider) {
+		spider = this.spider;
+	}
 	public void getUserInfo(String path,int deep) throws IOException, InterruptedException
 	{	
 		SaveInfo.initFileEnvironment_GetUserInfo(deep);
@@ -26,7 +31,7 @@ public class Func_GetUserInfo
 		System.out.println(y_ids.getNum());
 		String uid = null;
 		while(null!=(uid=y_ids.getUid())){
-			GetUserInfo getUserInfo = new GetUserInfo(uid);
+			GetUserInfo getUserInfo = new GetUserInfo(uid,spider);
 			threadPool.execute(getUserInfo);
 		}
 
