@@ -27,7 +27,8 @@ public class Main_GetAtRec {
 		Config.initial("D:\\Project_DataMinning\\Data\\Sina_res\\Sina_AgePre\\");
 		//登录
 		Login.login(false);
-		SpiderSina spider = new SpiderSina(Login.getLOGIN_LOGIN_WC().getCookieManager().getCookies());
+		SpiderSina spider = SpiderSina.getInstance();
+		spider.setHeader(Login.getLOGIN_LOGIN_WC().getCookieManager().getCookies());
 		SaveInfo.mkdir("Weibos_At");
 		RWUid y_ids = GetInfo.getUIDinDir("Weibos");//读取用户ID放入ids[hashSet]
 		idFilter(y_ids);

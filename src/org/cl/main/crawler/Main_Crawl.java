@@ -43,7 +43,8 @@ public class Main_Crawl{
 		//登录
 		Config.initial(Root_Path);
 		Login.login(false);
-		SpiderSina spider = new SpiderSina(Login.getLOGIN_LOGIN_WC().getCookieManager().getCookies());
+		SpiderSina spider = SpiderSina.getInstance();
+		spider.setHeader(Login.getLOGIN_LOGIN_WC().getCookieManager().getCookies());
 		//若deep>1时，将之前得到的拓展ID当做此次的原Id,此时的ID仍要获取拓展ID，但在存储用户信息时还是要注明为拓展用户
 		if(type==1||type==4){
 			Func_GetUserInfo getUserInfo = new Func_GetUserInfo(spider);

@@ -12,10 +12,20 @@ import com.gargoylesoftware.htmlunit.util.Cookie;
 public class SpiderSina
 {
 	/** 请求授权参数*/
+	
 	private static final String SOURCE="140226478";
 	private static final  Map<String, String> headers = new HashMap<String, String>();
+	
+	private SpiderSina(){}
+	
+	private static class SpiderFactory{
+		private static SpiderSina spiderSina = new SpiderSina();
+	}
+	public static SpiderSina getInstance(){
+		return SpiderFactory.spiderSina;
+	}
 
-	public SpiderSina(Set<Cookie> cookie)
+	public void setHeader(Set<Cookie> cookie)
 	{
 		headers.put("Accept", "text/html, application/xhtml+xml, */*");
 		headers.put("Accept-Language", "zh-cn");
